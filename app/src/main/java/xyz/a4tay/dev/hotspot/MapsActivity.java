@@ -409,7 +409,7 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
             e.printStackTrace();
         }
         dotProtocols.putDot(lat, lng, colorCode, dotID, hash);
-        mClusterManager.addItem(new ClusterHandler(lat, lng, "From button", "Button time"));
+        mClusterManager.addItem(new ClusterHandler(lat, lng, hash, "Button time"));
         mClusterManager.cluster();
     }
 }
