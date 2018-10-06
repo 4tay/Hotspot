@@ -1,27 +1,10 @@
 package xyz.a4tay.dev.hotspot;
-import android.util.Log;
 
-import org.json.JSONObject;
 import org.junit.Before;
-import org.junit.Rule;
 import org.junit.Test;
-import static org.mockito.Mockito.*;
-
-import org.junit.runner.RunWith;
-import org.mockito.Mock;
 import org.mockito.MockitoAnnotations;
-import org.mockito.junit.MockitoJUnit;
-import org.mockito.junit.MockitoRule;
-import org.robolectric.RobolectricTestRunner;
-import org.robolectric.annotation.Config;
 
-import java.io.IOException;
-
-import okhttp3.OkHttpClient;
-import okhttp3.Request;
-import okhttp3.Response;
-
-import static org.junit.Assert.*;
+import static org.junit.Assert.assertEquals;
 
 /**
  * Example local unit test, which will execute on the development machine (host).
@@ -35,6 +18,7 @@ public class UnitTests {
     public void setup() {
         MockitoAnnotations.initMocks(this);
     }
+
 
 //    @Mock
 //    Request mockRequest = mock(Request.class);

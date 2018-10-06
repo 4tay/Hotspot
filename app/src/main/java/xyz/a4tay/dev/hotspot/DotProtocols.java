@@ -24,7 +24,7 @@ public class DotProtocols
         }
 
     public JSONObject getDots(Double currentCameraLat, Double currentCameraLng) {
-        //enableStrictMode();
+        enableStrictMode();
 
         Request request = new Request.Builder()
                 .url("https://eg75gef3gi.execute-api.us-east-1.amazonaws.com/alpha?lat=" + currentCameraLat + "&lng=" + currentCameraLng)
