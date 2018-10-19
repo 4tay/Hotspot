@@ -1,8 +1,12 @@
 package xyz.a4tay.dev.hotspot;
 
 import android.os.StrictMode;
+import android.util.Log;
+
 import com.google.android.gms.maps.GoogleMap;
 import okhttp3.*;
+
+import org.json.JSONException;
 import org.json.JSONObject;
 
 import java.io.IOException;
@@ -19,8 +23,7 @@ public class DotProtocols
         StrictMode.setThreadPolicy(policy);
         }
 
-    public JSONObject getDots(Double currentCameraLat, Double currentCameraLng) throws Exception
-        {
+    public JSONObject getDots(Double currentCameraLat, Double currentCameraLng) {
         enableStrictMode();
 
         Request request = new Request.Builder()
@@ -29,10 +32,16 @@ public class DotProtocols
                 .addHeader("Content-Type", "application/json")
                 .build();
 
-        Response response = client.newCall(request).execute();
-        JSONObject JSONresult = new JSONObject(response.body().string());
-        return JSONresult;
+        try {
+            Response response = client.newCall(request).execute();
+            return new JSONObject(response.body().string());
+        } catch (IOException e) {
+            Log.d(this.getClass().getName(), "Error in IO: " + e.toString());
+        } catch (JSONException e) {
+            Log.d(this.getClass().getName(), "Error in JSON: " + e.toString());
         }
+        return new JSONObject();
+    }
 
     public Response putDot(double lat, double lng, Integer colorCode, Double dotID)
         {
