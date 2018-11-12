@@ -122,31 +122,31 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
 
             rateButton1.setOnClickListener(v -> {
                 if (isOpen) {
-                    dropDot(lastKnownLocation.getLatitude(), lastKnownLocation.getLongitude(), 1, (double) 334);
+                    dropDot(lastKnownLocation.getLatitude(), lastKnownLocation.getLongitude(), 1, "321");
                 }
             });
 
             rateButton2.setOnClickListener(v -> {
                 if (isOpen) {
-                    dropDot(lastKnownLocation.getLatitude(), lastKnownLocation.getLongitude(), 2, (double) 334);
+                    dropDot(lastKnownLocation.getLatitude(), lastKnownLocation.getLongitude(), 2, "321");
                 }
             });
 
             rateButton3.setOnClickListener(v -> {
                 if (isOpen) {
-                    dropDot(lastKnownLocation.getLatitude(), lastKnownLocation.getLongitude(), 3, (double) 334);
+                    dropDot(lastKnownLocation.getLatitude(), lastKnownLocation.getLongitude(), 3, "321");
                 }
             });
 
             rateButton4.setOnClickListener(v -> {
                 if (isOpen) {
-                    dropDot(lastKnownLocation.getLatitude(), lastKnownLocation.getLongitude(), 4, (double) 334);
+                    dropDot(lastKnownLocation.getLatitude(), lastKnownLocation.getLongitude(), 4, "321");
                 }
             });
 
             rateButton5.setOnClickListener(v -> {
                 if (isOpen) {
-                    dropDot(lastKnownLocation.getLatitude(), lastKnownLocation.getLongitude(), 5, (double) 334);
+                    dropDot(lastKnownLocation.getLatitude(), lastKnownLocation.getLongitude(), 5, "321");
                 }
             });
 
@@ -241,7 +241,7 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
                     @Override
                     public void onClick(View view) {
                         if (hashEntry.getText().toString() != null && !hashEntry.getText().toString().equals("")) {
-                            dropDot(lastKnownLocation.getLatitude(), lastKnownLocation.getLongitude(), hashRating, (double) 334,
+                            dropDot(lastKnownLocation.getLatitude(), lastKnownLocation.getLongitude(), hashRating, "321",
                                     hashEntry.getText().toString());
                         }
                         else {
@@ -318,7 +318,7 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
         }
     };
 
-    private void dropDot(Double lat, Double lng, Integer colorCode, Double dotID) {
+    private void dropDot(Double lat, Double lng, Integer colorCode, String dotID) {
         try {
             switch (colorCode) {
                 case 1:
@@ -366,7 +366,7 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
         animateFab();
     }
 
-    private void dropDot(Double lat, Double lng, Integer colorCode, Double dotID, String hash) {
+    private void dropDot(Double lat, Double lng, Integer colorCode, String dotID, String hash) {
         try {
             switch (colorCode) {
                 case 1:

@@ -41,11 +41,11 @@ public class DotProtocols
         return new JSONObject();
     }
 
-    public Response putDot(String url, double lat, double lng, Integer colorCode, Double dotID)
+    public Response putDot(String url, double lat, double lng, Integer colorCode, String dotID)
         {
         MediaType mediaType = MediaType.parse("application/json");
-        RequestBody body = RequestBody.create(mediaType, "{\r\n\"body\":\r\n\t{\r\n\t\"lat\":"+lat+",\r\n\t\"lng\":"+lng+"," +
-                "\r\n\t\"locationID\":987654321,\r\n\t\"colorCode\":"+colorCode+",\r\n\t\"hash\":'this is a test'\r\n\t}\r\n}\r\n");
+        RequestBody body = RequestBody.create(mediaType, "{\"body\":{\"lat\":"+lat+",\"lng\":"+lng+"," +
+                "\"locationID\":\""+dotID+"\",\"colorCode\":"+colorCode+",\"hash\":\"this is a test\"}}");
         Request request = new Request.Builder()
                 .url(url)
                 .put(body)
@@ -65,11 +65,11 @@ public class DotProtocols
         }
         return response;
         }
-        public Response putDot(String url, double lat, double lng, Integer colorCode, Double dotID, String hash)
+        public Response putDot(String url, double lat, double lng, Integer colorCode, String dotID, String hash)
         {
             MediaType mediaType = MediaType.parse("application/json");
-            RequestBody body = RequestBody.create(mediaType, "{\r\n\"body\":\r\n\t{\r\n\t\"lat\":"+lat+",\r\n\t\"lng\":"+lng+"," +
-                    "\r\n\t\"locationID\":123,\r\n\t\"colorCode\":"+colorCode+",\r\n\t\"hash\":"+hash+"\r\n\t}\r\n}\r\n");
+            RequestBody body = RequestBody.create(mediaType, "{\"body\":{\"lat\":"+lat+",\"lng\":"+lng+"," +
+                    "\"locationID\":\""+dotID+"\",\"colorCode\":"+colorCode+",\"hash\":"+hash+"}}");
             Request request = new Request.Builder()
                     .url(url)
                     .put(body)
