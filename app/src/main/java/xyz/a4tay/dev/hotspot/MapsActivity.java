@@ -5,11 +5,12 @@ import android.content.Context;
 import android.content.pm.PackageManager;
 import android.location.Location;
 import android.location.LocationManager;
+import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.design.widget.BottomNavigationView;
 import android.support.design.widget.FloatingActionButton;
-import android.support.v4.app.*;
-import android.os.Bundle;
+import android.support.v4.app.ActivityCompat;
+import android.support.v4.app.FragmentActivity;
 import android.support.v4.content.ContextCompat;
 import android.view.MenuItem;
 import android.view.View;
@@ -19,7 +20,6 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.TextView;
 import android.widget.Toast;
-
 import com.google.android.gms.maps.CameraUpdateFactory;
 import com.google.android.gms.maps.GoogleMap;
 import com.google.android.gms.maps.OnMapReadyCallback;
@@ -27,7 +27,6 @@ import com.google.android.gms.maps.SupportMapFragment;
 import com.google.android.gms.maps.model.LatLng;
 import com.google.maps.android.clustering.Cluster;
 import com.google.maps.android.clustering.ClusterManager;
-
 import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
@@ -47,6 +46,7 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
     Dialog popup;
     private ClusterManager<ClusterHandler> mClusterManager;
     private int hashRating = 1;
+    private String baseURL = "https://eg75gef3gi.execute-api.us-east-1.amazonaws.com/alpha";
 
     interface runLambda {
         void run();
@@ -122,36 +122,36 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
 
             rateButton1.setOnClickListener(v -> {
                 if (isOpen) {
-                    dropDot(lastKnownLocation.getLatitude(), lastKnownLocation.getLongitude(), 1, (double) 334);
+                    dropDot(lastKnownLocation.getLatitude(), lastKnownLocation.getLongitude(), 1, "321");
                 }
             });
 
             rateButton2.setOnClickListener(v -> {
                 if (isOpen) {
-                    dropDot(lastKnownLocation.getLatitude(), lastKnownLocation.getLongitude(), 2, (double) 334);
+                    dropDot(lastKnownLocation.getLatitude(), lastKnownLocation.getLongitude(), 2, "321");
                 }
             });
 
             rateButton3.setOnClickListener(v -> {
                 if (isOpen) {
-                    dropDot(lastKnownLocation.getLatitude(), lastKnownLocation.getLongitude(), 3, (double) 334);
+                    dropDot(lastKnownLocation.getLatitude(), lastKnownLocation.getLongitude(), 3, "321");
                 }
             });
 
             rateButton4.setOnClickListener(v -> {
                 if (isOpen) {
-                    dropDot(lastKnownLocation.getLatitude(), lastKnownLocation.getLongitude(), 4, (double) 334);
+                    dropDot(lastKnownLocation.getLatitude(), lastKnownLocation.getLongitude(), 4, "321");
                 }
             });
 
             rateButton5.setOnClickListener(v -> {
                 if (isOpen) {
-                    dropDot(lastKnownLocation.getLatitude(), lastKnownLocation.getLongitude(), 5, (double) 334);
+                    dropDot(lastKnownLocation.getLatitude(), lastKnownLocation.getLongitude(), 5, "321");
                 }
             });
 
             try {
-                JSONArray dotArray = dotProtocols.getDots(lastKnownLocation.getLatitude(), lastKnownLocation.getLongitude()).getJSONArray("locations");
+                JSONArray dotArray = dotProtocols.getDots(baseURL, lastKnownLocation.getLatitude(), lastKnownLocation.getLongitude()).getJSONArray("locations");
 
                 Double dotColorTotal = 0.0;
                 Double dotCount = 0.0;
@@ -241,7 +241,7 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
                     @Override
                     public void onClick(View view) {
                         if (hashEntry.getText().toString() != null && !hashEntry.getText().toString().equals("")) {
-                            dropDot(lastKnownLocation.getLatitude(), lastKnownLocation.getLongitude(), hashRating, (double) 334,
+                            dropDot(lastKnownLocation.getLatitude(), lastKnownLocation.getLongitude(), hashRating, "321",
                                     hashEntry.getText().toString());
                         }
                         else {
@@ -318,7 +318,7 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
         }
     };
 
-    private void dropDot(Double lat, Double lng, Integer colorCode, Double dotID) {
+    private void dropDot(Double lat, Double lng, Integer colorCode, String dotID) {
         try {
             switch (colorCode) {
                 case 1:
@@ -360,13 +360,13 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
         } catch (Exception e) {
             e.printStackTrace();
         }
-        dotProtocols.putDot(lat, lng, colorCode, dotID);
+        dotProtocols.putDot(baseURL, lat, lng, colorCode, dotID);
         mClusterManager.addItem(new ClusterHandler(lat, lng, "From button", "Button time"));
         mClusterManager.cluster();
         animateFab();
     }
 
-    private void dropDot(Double lat, Double lng, Integer colorCode, Double dotID, String hash) {
+    private void dropDot(Double lat, Double lng, Integer colorCode, String dotID, String hash) {
         try {
             switch (colorCode) {
                 case 1:
@@ -408,7 +408,7 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
         } catch (Exception e) {
             e.printStackTrace();
         }
-        dotProtocols.putDot(lat, lng, colorCode, dotID, hash);
+        dotProtocols.putDot(baseURL, lat, lng, colorCode, dotID, hash);
         mClusterManager.addItem(new ClusterHandler(lat, lng, hash, "Button time"));
         mClusterManager.cluster();
     }
